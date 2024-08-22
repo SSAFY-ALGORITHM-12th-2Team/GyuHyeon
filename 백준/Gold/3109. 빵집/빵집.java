@@ -7,7 +7,6 @@ public class Main {
 	static boolean[][] v;
 	static int n, m, ans;
 	static int[] dr = {-1,0,1};
-	static boolean flag;
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String[] str = br.readLine().split(" ");
@@ -21,25 +20,23 @@ public class Main {
 			for (int j = 0; j < m; j++) map[i][j] = str[j].charAt(0);
 		}
 		for (int i = 0; i < n; i++) {
-			flag = false;
-			v[i][0] = true;
 			solve(i, 0);
 			
 		}
 		System.out.println(ans);
 	}
-	private static void solve(int i, int j) {
+	private static boolean solve(int i, int j) {
 		if (j == m-1) {
 			ans++;
-			flag = true;
-			return;
+			return true;
 		}
-		for (int d = 0; d < 3 && !flag; d++) {
+		for (int d = 0; d < 3; d++) {
 			int nr = i + dr[d];
 			if (nr >= 0 && nr < n && !v[nr][j+1] && map[nr][j+1] == '.') {
 				v[nr][j+1] = true;
-				solve(nr, j+1);
+				if (solve(nr, j+1)) return true;
 			}
 		}
+		return false;
 	}
 }
