@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
-	static String[][] map;
+	static char[][] map;
 	static boolean[][] v;
 	static int n, m, ans;
 	static int[] dr = {-1,0,1};
@@ -13,12 +13,12 @@ public class Main {
 		String[] str = br.readLine().split(" ");
 		n = Integer.parseInt(str[0]);
 		m = Integer.parseInt(str[1]);
-		map = new String[n][m];
+		map = new char[n][m];
 		v = new boolean[n][m];
 		ans = 0;
 		for (int i = 0; i < n; i++) {
 			str = br.readLine().split("");
-			for (int j = 0; j < m; j++) map[i][j] = str[j];
+			for (int j = 0; j < m; j++) map[i][j] = str[j].charAt(0);
 		}
 		for (int i = 0; i < n; i++) {
 			flag = false;
@@ -36,7 +36,7 @@ public class Main {
 		}
 		for (int d = 0; d < 3 && !flag; d++) {
 			int nr = i + dr[d];
-			if (nr >= 0 && nr < n && !v[nr][j+1] && map[nr][j+1].equals(".")) {
+			if (nr >= 0 && nr < n && !v[nr][j+1] && map[nr][j+1] == '.') {
 				v[nr][j+1] = true;
 				solve(nr, j+1);
 			}
