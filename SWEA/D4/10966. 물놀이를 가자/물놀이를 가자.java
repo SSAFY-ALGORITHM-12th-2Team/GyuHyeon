@@ -30,6 +30,7 @@ public class Solution {
 					}
 				}
 			}
+			int ans = 0;
 			while (!q.isEmpty()) {
 				int[] cur = q.poll();
 				for (int d = 0; d < 4; d++) {
@@ -37,15 +38,10 @@ public class Solution {
 					if (nr >= 0 && nr < n && nc >= 0 && nc < m && !v[nr][nc] && mem[nr][nc] > mem[cur[0]][cur[1]] + 1) {
 						v[nr][nc] = true;
 						mem[nr][nc] = mem[cur[0]][cur[1]]+1;
+						ans += mem[nr][nc];
 						int[] next = {nr, nc};
 						q.offer(next);
 					}
-				}
-			}
-			int ans = 0;
-			for (int i = 0; i < n; i++) {
-				for (int j = 0; j < m; j++) {
-					ans += mem[i][j];
 				}
 			}
 			System.out.println("#" + t + " " + ans);
