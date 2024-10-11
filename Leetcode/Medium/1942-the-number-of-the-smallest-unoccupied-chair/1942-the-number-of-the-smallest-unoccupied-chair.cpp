@@ -7,14 +7,13 @@ public:
         }
     };
     int smallestChair(vector<vector<int>>& times, int targetFriend) {
-        for (int i = 0; i < times.size(); i++) times[i].push_back(i);
+        targetFriend = times[targetFriend][0];
         sort(times.begin(), times.end());
         priority_queue<vector<int>, vector<vector<int>>, cmp> oc;
         priority_queue<int, vector<int>, greater<>> chair;
         for (auto t: times) {
-            if (!oc.empty()) cout << oc.top()[1] << endl;
             while (!oc.empty() && t[0] >= oc.top()[1]) {
-                chair.push(oc.top()[3]);
+                chair.push(oc.top()[2]);
                 oc.pop();
             }
             if (!chair.empty()) {
@@ -23,7 +22,7 @@ public:
             }
             else t.push_back(oc.size());
             oc.push(t);
-            if (t[2] == targetFriend) return t[3];
+            if (t[0] == targetFriend) return t[2];
         }
         return -1;
     }
